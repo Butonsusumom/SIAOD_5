@@ -110,7 +110,6 @@ var
 begin
   st:=nil;
   Head:=st;
-  Rang:=0;
   output:='';
    i:=1;
   while i<= Length(input) do
@@ -125,12 +124,15 @@ begin
 
     else
     begin
+
       t:=GetSteck(st);
       if t <> '(' then
       begin
         output:=output+t;
-        Rang := Rang + CharRang(t);
-      end;
+
+      end
+      else  inc(i);
+      
 
     end;
     end;
@@ -148,14 +150,17 @@ end;
 
 var
   input,str:string;
+  i:integer;
 begin
-
+   Rang:=0;
   Write('Write your expression: ');
   Readln(input);
   str:=FindNotation(input);
   Writeln;
   Write('Poland notation: ');
   Writeln(str);
+  for i:=1 to Length(str) do
+   Rang := Rang + CharRang(str[i]);
   Write('Rang of expression: ');
   Writeln(Rang);
   Readln;
